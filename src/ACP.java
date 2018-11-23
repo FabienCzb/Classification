@@ -78,7 +78,7 @@ public class ACP {
         for(int i = 0; i < 3; i++){
             max = vecPropres.get(0,0);
             index = 0;
-            for(int j = 0; j < 13; i++){
+            for(int j = 0; j < 13; j++){
                 if((max < valPropres.get(j,0))){
                     max = valPropres.get(j,0);
                     index = j;
