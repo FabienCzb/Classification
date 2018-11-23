@@ -4,29 +4,30 @@ public class Matrice {
     private int column;
     private double[][] mat;
 
-    public Matrice(double[][] mat){
+    public Matrice(double[][] mat, int column, int row){
         this.mat = mat;
-
-    }
-
-    public Matrice(int row, int column){
-        this.row = row;
         this.column = column;
+        this.row = row;
     }
 
-    public static Matrice multiply(Matrice mat1, Matrice mat2) {
-        Matrice mat = new Matrice(mat1.getRow(),mat2.getColumn());
+
+    public Matrice multiply(Matrice mat) {
+        Matrice ret = new Matrice(
+                new double[this.getRow()][mat.getColumn()],
+                this.getColumn(),
+                mat.getRow());
+
         double val;
-        for(int i = 0; i < mat2.getColumn(); i++){
-            for(int j = 0; j < mat1.getRow(); j++){
+        for(int i = 0; i < mat.getColumn(); i++){
+            for(int j = 0; j < this.getRow(); j++){
                 val = 0;
-                for(int k = 0; k < mat1.getColumn(); k++){
-                    val += (mat1.getValAt(i,j) * mat2.getValAt(j,i));
+                for(int k = 0; k < this.getColumn(); k++){
+                    val += (this.getValAt(i,k) * mat.getValAt(k,j));
                 }
-                mat.setValAt(i,j,val);
+                ret.setValAt(i,j,val);
             }
         }
-        return mat;
+        return ret;
     }
 
 
@@ -50,7 +51,7 @@ public class Matrice {
     public void afficher() {
         for(int i = 0; i < this.getRow(); i++) {
             for(int j = 0; j < this.getColumn(); j++) {
-                System.out.print(this.getValAt(i,j) + " ");
+                System.out.print(this.getValAt(i,j) + "\t");
             }
             System.out.println();
         }
@@ -59,7 +60,8 @@ public class Matrice {
 
     // Calcul de la transposée d'une matrice
     public Matrice transpose(){
-        Matrice temp = new Matrice(this.getRow(),this.getColumn());
+
+        Matrice temp = new Matrice(new double[][]{{}},this.getRow(),this.getColumn());
         for(int i = 0 ; i < this.getColumn(); i++){
             for(int j = 0; j < this.getRow(); j++){
                 temp.setValAt(j,i,this.getValAt(i,j));
