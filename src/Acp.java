@@ -1,11 +1,14 @@
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.apache.commons.math3.linear.RealMatrix;
+import org.apache.commons.math3.stat.correlation.Covariance;
 
 import fr.enseeiht.danck.voice_analyzer.Field;
-import Jama.Matrix;
+import org.ejml.data.Matrix;
 
 public class Acp {
 
@@ -21,7 +24,9 @@ public class Acp {
 	public Acp(String baseTest) {
 		this.baseTest = baseTest;
 	}
-	
+
+
+
 	//Créer la matrice contenant la moyenne des MFCC de chaque fichier du dossier 'baseTest'
 	public Matrix creerMatriceBaseTest() throws IOException, InterruptedException{
 		File dossier = new File(baseTest);
@@ -153,5 +158,7 @@ public class Acp {
 			System.out.println();
 		}
 		System.out.println();
-	}	
+	}
+
+
 }
